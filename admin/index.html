@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dashboard Admin · Hidayatul Ma'mun</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body class="dashboard-body">
+  <header class="admin-header">
+    <a class="brand" href="../index.html"><img src="../assets/logo-placeholder.svg" alt=""><span><strong>Hidayatul Ma'mun</strong><small>Panel Administrator</small></span></a>
+    <div class="admin-actions"><span id="adminEmail" class="muted"></span><button id="logoutButton" class="button button-outline">Keluar</button></div>
+  </header>
+  <main class="dashboard">
+    <div class="dashboard-heading"><div><p class="section-kicker">Sistem Informasi Pondok</p><h1>Database Santri</h1><p class="muted">Kelola data santri. Halaman ini hanya dapat digunakan oleh akun admin yang berwenang.</p></div></div>
+    <div class="stats-grid">
+      <article class="stat-card"><span>Total Santri</span><strong id="totalStudents">—</strong></article>
+      <article class="stat-card"><span>Santri Aktif</span><strong id="activeStudents">—</strong></article>
+      <article class="stat-card"><span>Santri Putra</span><strong id="maleStudents">—</strong></article>
+      <article class="stat-card"><span>Santri Putri</span><strong id="femaleStudents">—</strong></article>
+    </div>
+    <section class="panel">
+      <div class="panel-heading"><div><h2>Data Santri</h2><p class="muted">Data bersifat privat dan tidak ditampilkan pada website publik.</p></div><button id="addStudentButton" class="button button-primary">＋ Tambah Santri</button></div>
+      <div class="toolbar"><input id="searchInput" type="search" placeholder="Cari nama, NIS, atau kelas..."><button id="exportButton" class="button button-outline">Ekspor CSV</button></div>
+      <div class="table-wrap"><table><thead><tr><th>NIS</th><th>Nama Santri</th><th>Jenis Kelamin</th><th>Kelas</th><th>Status</th><th>Aksi</th></tr></thead><tbody id="studentRows"><tr><td colspan="6">Memuat data...</td></tr></tbody></table></div>
+      <p class="form-message" id="dashboardMessage" role="status"></p>
+    </section>
+    <p class="tiny-note">Jaga kerahasiaan akun admin. Jangan membagikan file konfigurasi berisi service_role key. Gunakan hanya anon/publishable key pada website.</p>
+  </main>
+
+  <dialog id="studentDialog" class="student-dialog">
+    <form id="studentForm" method="dialog">
+      <div class="dialog-heading"><h2 id="dialogTitle">Tambah Santri</h2><button type="button" id="closeDialog" class="close-button" aria-label="Tutup">×</button></div>
+      <input type="hidden" id="studentId">
+      <div class="form-grid">
+        <div><label for="nis">NIS *</label><input id="nis" required maxlength="40"></div>
+        <div><label for="fullName">Nama lengkap *</label><input id="fullName" required maxlength="150"></div>
+        <div><label for="gender">Jenis kelamin *</label><select id="gender" required><option value="">Pilih</option><option value="Putra">Putra</option><option value="Putri">Putri</option></select></div>
+        <div><label for="className">Kelas/program</label><input id="className" maxlength="80"></div>
+        <div><label for="birthPlace">Tempat lahir</label><input id="birthPlace" maxlength="100"></div>
+        <div><label for="birthDate">Tanggal lahir</label><input id="birthDate" type="date"></div>
+        <div><label for="entryYear">Tahun masuk</label><input id="entryYear" type="number" min="1900" max="2100"></div>
+        <div><label for="status">Status</label><select id="status"><option>Aktif</option><option>Alumni</option><option>Nonaktif</option></select></div>
+        <div class="wide"><label for="address">Alamat</label><textarea id="address" rows="2" maxlength="500"></textarea></div>
+        <div><label for="guardianName">Nama wali</label><input id="guardianName" maxlength="150"></div>
+        <div><label for="guardianPhone">Nomor kontak wali</label><input id="guardianPhone" type="tel" maxlength="30"></div>
+      </div>
+      <p class="form-message" id="formMessage" role="status"></p>
+      <div class="dialog-actions"><button type="button" id="cancelButton" class="button button-outline">Batal</button><button type="submit" class="button button-primary">Simpan Data</button></div>
+    </form>
+  </dialog>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="../js/config.js"></script><script src="../js/supabase-client.js"></script><script src="../js/dashboard.js"></script>
+</body>
+</html>
